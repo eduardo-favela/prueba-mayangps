@@ -1,0 +1,7 @@
+<div *ngIf="key; else elseBlock">
+  <router-outlet></router-outlet>
+</div>
+
+<ng-template #elseBlock>
+  <app-login></app-login>
+</ng-template>
