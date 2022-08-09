@@ -13,8 +13,8 @@ class LoginRoutes {
     config() {
         this.router.post('/iniciarsesion', loginController_1.default.login);
         this.router.post('/setUser', loginController_1.default.setUser);
+        this.router.post('/setSessionKey', loginController_1.default.setSessionKey);
         this.router.post('/updateUser', loginController_1.default.updateUser);
-        this.router.post('/getDeptoUserId', loginController_1.default.getDeptoUserId);
     }
 }
 const loginRoutes = new LoginRoutes();

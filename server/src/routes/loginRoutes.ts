@@ -11,8 +11,8 @@ class LoginRoutes {
     config(): void{
         this.router.post('/iniciarsesion', loginController.login)
         this.router.post('/setUser', loginController.setUser)
+        this.router.post('/setSessionKey', loginController.setSessionKey)
         this.router.post('/updateUser', loginController.updateUser)
-        this.router.post('/getDeptoUserId', loginController.getDeptoUserId)
     }
 }
 

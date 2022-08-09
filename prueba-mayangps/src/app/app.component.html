@@ -1,4 +1,4 @@
-<div *ngIf="key; else elseBlock">
+<div *ngIf="sessionStorage.getItem('key'); else elseBlock">
   <router-outlet></router-outlet>
 </div>
 
