@@ -1,1 +1,14 @@
-<p>home works!</p>
+<div class="row mt-3">
+  <div class="col-2 offset-2">
+    <button class="btn btn-primary form-control" (click)="locatePosition()">Ubicar mi posición</button>
+  </div>
+</div>
+<div class="row d-flex justify-content-center my-3">
+  <div class="col-8">
+    <div id="map"
+      leaflet
+      (leafletMapReady)="onMapReady($event)"
+      [leafletOptions]="mapOptions">
+    </div>
+  </div>
+</div>

@@ -66,6 +66,25 @@ class LoginController {
             res.json(result)
         });
     }
+
+    public async deleteSessionKey(req: Request, res: Response) {
+        await db.query(`DELETE FROM Sesiones WHERE sesiones.key = ?`, req.body.key, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            res.json(result)
+        });
+    }
+
+    public async checkKey(req: Request, res: Response) {
+        await db.query(`SELECT * FROM sesiones WHERE sesiones.key = ?`, [req.body.key], function (err: any, result: any, fields: any) {
+            if (err) throw err
+            if (result.length > 0) {
+                res.json(true)
+            }
+            else {
+                res.json(false)
+            }
+        });
+    }
 }
 
 const loginController = new LoginController()

@@ -86,6 +86,29 @@ class LoginController {
             });
         });
     }
+    deleteSessionKey(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield database_1.default.query(`DELETE FROM Sesiones WHERE sesiones.key = ?`, req.body.key, function (err, result, fields) {
+                if (err)
+                    throw err;
+                res.json(result);
+            });
+        });
+    }
+    checkKey(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield database_1.default.query(`SELECT * FROM sesiones WHERE sesiones.key = ?`, [req.body.key], function (err, result, fields) {
+                if (err)
+                    throw err;
+                if (result.length > 0) {
+                    res.json(true);
+                }
+                else {
+                    res.json(false);
+                }
+            });
+        });
+    }
 }
 const loginController = new LoginController();
 exports.default = loginController;

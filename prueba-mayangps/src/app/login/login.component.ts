@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -32,6 +32,12 @@ export class LoginComponent implements OnInit {
   disabledFormLogin = false
   disabledFormModal = false
 
+  @Output() checkSessionEvent = new EventEmitter<string>();
+
+  checkSession() {
+    this.checkSessionEvent.emit();
+  }
+
   ngOnInit(): void {
   }
 
@@ -44,9 +50,10 @@ export class LoginComponent implements OnInit {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    this.loginService.setSessionKey({usuarioID:this.loginInfo.usuario, key: result}).subscribe(
-      res=>{
+    this.loginService.setSessionKey({ usuarioID: this.loginInfo.usuario, key: result }).subscribe(
+      res => {
         this.sessionStorage.setItem('key', result)
+        this.checkSession();
       },
       err => {
         console.log(err);
@@ -92,7 +99,7 @@ export class LoginComponent implements OnInit {
           data => {
             if (data) {
               this.disabledFormModal = false
-              this.sessionStorage.setItem('key', 'abc')
+              this.generateKey()
               this.alertModalSuccess = true
               this.alertModal = false
               this.newUsrInfo = {

@@ -1,7 +1,34 @@
-<div *ngIf="sessionStorage.getItem('key'); else elseBlock">
-  <router-outlet></router-outlet>
+<div *ngIf="key; else elseBlock">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 p-3 bg-dark white">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/" (click)="reloadPage()">MayanGPS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" routerLink="/" (click)="reloadPage()" aria-current="page">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" routerLink="/perfil">Perfil</a>
+                </li>
+              </ul>
+            </div>
+            <form class="d-flex">
+              <button class="btn btn-danger form-control" (click)="logOut()">Log Out</button>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
 </div>
 
 <ng-template #elseBlock>
-  <app-login></app-login>
+  <app-login (checkSessionEvent)="checkSession()"></app-login>
 </ng-template>

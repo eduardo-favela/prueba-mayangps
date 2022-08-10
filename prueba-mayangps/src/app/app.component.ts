@@ -16,18 +16,35 @@ export class AppComponent implements OnInit {
   }
 
   sessionStorage = sessionStorage
-  key = null;
+  key: any = null;
 
-  checkSession(){
-    if(this.sessionStorage.getItem('key')){
-      this.loginService.checkKey(this.sessionStorage.getItem('key')).subscribe(
-        res=>{
-          console.log(res)
+  checkSession() {
+    if (this.sessionStorage.getItem('key')) {
+      this.loginService.checkKey({ key: this.sessionStorage.getItem('key') }).subscribe(
+        res => {
+          this.key = res
         },
         err => {
           console.log(err);
         }
       )
     }
+  }
+
+  logOut() {
+    this.loginService.logOut({ key: this.sessionStorage.getItem('key') }).subscribe(
+      res => {
+        if(res){
+          this.checkSession()
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+  reloadPage(){
+    window.location.replace('/');
   }
 }

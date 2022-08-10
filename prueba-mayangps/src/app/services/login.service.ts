@@ -13,7 +13,11 @@ export class LoginService {
     return this.http.post(`${API_URI}/login/iniciarsesion`, userdata)
   }
 
-  setUser(userdata: any){
+  logOut(key: any) {
+    return this.http.post(`${API_URI}/login/deleteSessionKey`, key)
+  }
+
+  setUser(userdata: any) {
     return this.http.post(`${API_URI}/login/setUser`, userdata)
   }
 
@@ -21,7 +25,11 @@ export class LoginService {
     return this.http.post(`${API_URI}/login/checkKey`, userdata)
   }
 
-  setSessionKey(key:any){
+  setSessionKey(key: any) {
     return this.http.post(`${API_URI}/login/setSessionKey`, key)
+  }
+
+  deleteSessionKey(key: any) {
+    return this.http.post(`${API_URI}/login/deleteSessionKey`, key)
   }
 }
