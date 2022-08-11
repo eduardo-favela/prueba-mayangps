@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PerfilComponent } from './perfil/perfil.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import * as bootstrap from 'bootstrap'
+import * as $ from 'jquery'
 
 const routes: Route[] = [
   { path: '', component: HomeComponent },

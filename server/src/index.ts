@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import bodyParser from 'body-parser';
 import loginRoutes from './routes/loginRoutes';
+import userRoutes from './routes/userRoutes';
 
 class Server {
 
@@ -25,6 +26,7 @@ class Server {
     }
     routes(): void {
         this.app.use('/api/login', loginRoutes)
+        this.app.use('/api/user', userRoutes)
     }
     start(): void {
         this.app.listen(this.app.get('port'), () => {

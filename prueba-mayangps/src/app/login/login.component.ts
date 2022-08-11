@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoginService } from '../services/login.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private userService: UserService) { }
 
   sessionStorage = sessionStorage
 
@@ -95,7 +96,7 @@ export class LoginComponent implements OnInit {
     this.disabledFormModal = true
     if (this.newUsrInfo.usuario && this.newUsrInfo.contra && this.newUsrInfo.descrip) {
       if (this.checkLength()) {
-        this.loginService.setUser(this.newUsrInfo).subscribe(
+        this.userService.setUser(this.newUsrInfo).subscribe(
           data => {
             if (data) {
               this.disabledFormModal = false

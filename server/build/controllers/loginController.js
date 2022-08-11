@@ -31,48 +31,6 @@ class LoginController {
             });
         });
     }
-    setUser(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            //ESTE MÉTODO RECIBE UN OBJETO CON CUATRO PROPIEDADES, UNA LLAMADA user, OTRA LLAMADA pass, UNA empleados_idempleado
-            //Y tipo_usuario
-            //CON ESTOS DATOS SE INSERTARÁ UN NUEVO USUARIO EN LA BASE DE DATOS CON UNA CONTRASEÑA ENCRIPTADA
-            const resultUsr = yield database_1.default.query(`SELECT * FROM Usuarios WHERE usuario = ?`, req.body.usuario);
-            if (resultUsr.length > 0) {
-                res.json(false);
-            }
-            else {
-                const saltRounds = 13;
-                bcrypt_1.default.hash(req.body.contra, saltRounds, function (err, hash) {
-                    return __awaiter(this, void 0, void 0, function* () {
-                        req.body.contra = hash;
-                        yield database_1.default.query(`INSERT INTO Usuarios set ?`, req.body, function (err, result, fields) {
-                            if (err)
-                                throw err;
-                            res.json(result);
-                        });
-                    });
-                });
-            }
-        });
-    }
-    updateUser(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            //ESTE MÉTODO RECIBE UN OBJETO CON DOS PROPIEDADES, UNA LLAMADA user Y OTRA LLAMADA pass
-            //LA PROPIEDAD pass ES LA NUEVA CONTRASEÑA DEL USUARIO Y LA PROPIERDAD user ES EL USUARIO AL QUE SE
-            //LE VA A CAMBIAR LA CONTRASEÑA
-            const saltRounds = 13;
-            bcrypt_1.default.hash(req.body.contra, saltRounds, function (err, hash) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    req.body.contra = hash;
-                    yield database_1.default.query(`UPDATE Usuarios SET contra = ? WHERE usuario = ?`, [req.body.contra, req.body.usuario], function (err, result, fields) {
-                        if (err)
-                            throw err;
-                        res.json(result);
-                    });
-                });
-            });
-        });
-    }
     setSessionKey(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const resultUsr = yield database_1.default.query(`SELECT * FROM Usuarios WHERE usuario = ?`, req.body.usuarioID);

@@ -1,1 +1,80 @@
-<p>perfil works!</p>
+<div class="row pl-3 pt-3">
+  <div class="col-md-3">
+    <label for="usr">Usuario</label>
+    <h3>{{usrInfo.usuario}}</h3>
+  </div>
+</div>
+<div class="row pl-3 pt-3">
+  <div class="col-md-3">
+    <label for="contra">Contraseña</label>
+    <h4>{{falsepass}}</h4>
+  </div>
+</div>
+<div class="row pl-3 pt-3">
+  <div class="col-md-3">
+    <label for="descrip">Descripción</label>
+    <p>{{usrInfo.descrip}}</p>
+  </div>
+</div>
+<div class="row pt-3 d-flex justify-content-between">
+  <div class="col-md-2">
+    <button class="btn btn-primary form-control" (click)="openEditModal()">Actualizar</button>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-danger form-control" (click)="openConfirmDelModal()">Eliminar cuenta</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Actualizar datos</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center m-3">
+          <div class="col-md-10">
+            <label for="usuarioInput">Usuario</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon3"><i class="fa
+                  fa-envelope-o" aria-hidden="true"></i></span>
+              <input [disabled]="disabledFormModal" type="text" class="form-control" placeholder="Nombre de usuario"
+              [(ngModel)]="editUsrInfo.usuario" aria-label="usuarioInput" aria-describedby="basic-addon3">
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center m-3">
+          <div class="col-md-10">
+            <label for="contraInput">Contraseña</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon4"><i class="fa
+                  fa-asterisk" aria-hidden="true"></i></span>
+              <input [disabled]="disabledFormModal" type="password" class="form-control" placeholder="Contraseña"
+              [(ngModel)]="editUsrInfo.pass" aria-label="contraInput" aria-describedby="basic-addon4">
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center m-3">
+          <div class="col-md-10">
+            <label for="descripInput">Descripción</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa fa-file-text" aria-hidden="true"></i></span>
+              <textarea [disabled]="disabledFormModal" class="form-control" [(ngModel)]="editUsrInfo.descrip" aria-label="desctextarea" rows="5" placeholder="Descripción del usuario"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-danger" [hidden]="!alertModal" role="alert">
+          {{alertModalMsg}}
+        </div>
+        <div class="alert alert-success" [hidden]="!alertModalSuccess" role="alert">
+          Cambios guardados
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="disabledFormModal" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cierreModal()">Cancelar</button>
+        <button [disabled]="disabledFormModal" type="button" class="btn btn-success" (click)="saveUser()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,10 +17,6 @@ export class LoginService {
     return this.http.post(`${API_URI}/login/deleteSessionKey`, key)
   }
 
-  setUser(userdata: any) {
-    return this.http.post(`${API_URI}/login/setUser`, userdata)
-  }
-
   checkKey(userdata: any) {
     return this.http.post(`${API_URI}/login/checkKey`, userdata)
   }
