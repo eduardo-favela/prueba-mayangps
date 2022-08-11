@@ -18,9 +18,9 @@ CREATE SCHEMA IF NOT EXISTS `pruebamayan` DEFAULT CHARACTER SET utf8mb4 ;
 USE `pruebamayan` ;
 
 -- -----------------------------------------------------
--- Table `pruebamayan`.`Usuarios`
+-- Table `pruebamayan`.`usuarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pruebamayan`.`Usuarios` (
+CREATE TABLE IF NOT EXISTS `pruebamayan`.`usuarios` (
   `usuarioID` INT(11) NOT NULL AUTO_INCREMENT,
   `usuario` VARCHAR(25) NULL DEFAULT NULL,
   `contra` VARCHAR(60) NULL DEFAULT NULL,
@@ -32,17 +32,19 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `pruebamayan`.`Sesiones`
+-- Table `pruebamayan`.`sesiones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `pruebamayan`.`Sesiones` (
+CREATE TABLE IF NOT EXISTS `pruebamayan`.`sesiones` (
   `sesionID` INT(11) NOT NULL AUTO_INCREMENT,
-  `key` VARCHAR(25) NULL DEFAULT NULL,
+  `key` VARCHAR(25) NOT NULL,
   `usuarioID` INT(11) NOT NULL,
+  `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`sesionID`),
-  INDEX `fk_Sesiones_usuario1_idx` (`usuarioID` ASC),
+  UNIQUE INDEX `key_UNIQUE` (`key` ASC) ,
+  INDEX `fk_Sesiones_usuario1_idx` (`usuarioID` ASC) ,
   CONSTRAINT `fk_Sesiones_usuario1`
     FOREIGN KEY (`usuarioID`)
-    REFERENCES `pruebamayan`.`Usuarios` (`usuarioID`)
+    REFERENCES `pruebamayan`.`usuarios` (`usuarioID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
