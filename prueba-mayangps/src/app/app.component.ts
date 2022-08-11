@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   }
 
   sessionStorage = sessionStorage
-  key: any = null;
+  key: any = false;
 
   checkSession() {
     if (this.sessionStorage.getItem('key')) {
@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   logOut() {
     this.loginService.logOut({ key: this.sessionStorage.getItem('key') }).subscribe(
       res => {
-        if(res){
+        if (res) {
           this.checkSession()
         }
       },
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     )
   }
 
-  reloadPage(){
+  reloadPage() {
     window.location.replace('/');
   }
 }

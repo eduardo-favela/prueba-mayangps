@@ -58,12 +58,27 @@ class UserController {
                 });
             }
             else {
-                yield database_1.default.query(`UPDATE Usuarios SET usuario = ?, descrip = ? WHERE usuario = ?`, [req.body.usuario, req.body.descrip, req.body.usuarioID], function (err, result, fields) {
+                yield database_1.default.query(`UPDATE Usuarios SET usuario = ?, descrip = ? WHERE usuarioID = ?`, [req.body.usuario, req.body.descrip, req.body.usuarioID], function (err, result, fields) {
                     if (err)
                         throw err;
                     res.json(result);
                 });
             }
+        });
+    }
+    deleteUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield database_1.default.query(`DELETE FROM Sesiones WHERE usuarioID = ?`, req.body.usuarioID, function (err, result, fields) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    if (err)
+                        throw err;
+                    yield database_1.default.query(`DELETE FROM Usuarios WHERE usuarioID = ?`, [req.body.usuarioID], function (err, result, fields) {
+                        if (err)
+                            throw err;
+                        res.json(true);
+                    });
+                });
+            });
         });
     }
     getUserInfo(req, res) {

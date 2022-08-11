@@ -22,11 +22,15 @@ class LoginController {
         const resultUsr = await db.query(`SELECT * FROM Usuarios WHERE usuario = ?`, req.body.usuarioID)
         if (resultUsr.length > 0) {
             req.body.usuarioID = resultUsr[0].usuarioID
+            db.query(`INSERT INTO Sesiones set ?`, req.body, function (err: any, result: any, fields: any) {
+                if (err) throw err
+                res.json(result)
+            });
         }
-        await db.query(`INSERT INTO Sesiones set ?`, req.body, function (err: any, result: any, fields: any) {
-            if (err) throw err
-            res.json(result)
-        });
+        else {
+            console.log(resultUsr)
+            res.json(false)
+        }
     }
 
     public async deleteSessionKey(req: Request, res: Response) {

@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  generateKey() {
+  generateKey(usuario: any) {
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = ""
     let charactersLength = characters.length;
@@ -51,8 +51,9 @@ export class LoginComponent implements OnInit {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    this.loginService.setSessionKey({ usuarioID: this.loginInfo.usuario, key: result }).subscribe(
+    this.loginService.setSessionKey({ usuarioID: usuario.usuario, key: result }).subscribe(
       res => {
+        $('#staticBackdrop').modal('hide')
         this.sessionStorage.setItem('key', result)
         this.checkSession();
       },
@@ -68,7 +69,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginInfo).subscribe(
         data => {
           if (data) {
-            this.generateKey()
+            this.generateKey(this.loginInfo)
             this.disabledFormLogin = false
           }
           else {
@@ -100,7 +101,7 @@ export class LoginComponent implements OnInit {
           data => {
             if (data) {
               this.disabledFormModal = false
-              this.generateKey()
+              this.generateKey(this.newUsrInfo)
               this.alertModalSuccess = true
               this.alertModal = false
               this.newUsrInfo = {
@@ -152,12 +153,11 @@ export class LoginComponent implements OnInit {
   }
 
   checkLength() {
-    if (this.newUsrInfo.usuario.length > 25) {
+    if (this.newUsrInfo.usuario.length > 25 || this.newUsrInfo.contra.length > 25) {
       return false
     }
-    if (this.newUsrInfo.contra.length > 25) {
-      return false
+    else {
+      return true
     }
-    return true
   }
 }

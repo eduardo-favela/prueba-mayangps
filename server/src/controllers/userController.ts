@@ -43,12 +43,24 @@ class UserController {
             });
         }
         else {
-            await db.query(`UPDATE Usuarios SET usuario = ?, descrip = ? WHERE usuario = ?`,
+            await db.query(`UPDATE Usuarios SET usuario = ?, descrip = ? WHERE usuarioID = ?`,
                 [req.body.usuario, req.body.descrip, req.body.usuarioID], function (err: any, result: any, fields: any) {
                     if (err) throw err
                     res.json(result)
                 });
         }
+    }
+
+    public async deleteUser(req: Request, res: Response) {
+
+        await db.query(`DELETE FROM Sesiones WHERE usuarioID = ?`, req.body.usuarioID, async function (err: any, result: any, fields: any) {
+            if (err) throw err
+            await db.query(`DELETE FROM Usuarios WHERE usuarioID = ?`,
+            [req.body.usuarioID], function (err: any, result: any, fields: any) {
+                if (err) throw err
+                res.json(true)
+            });
+        });
     }
 
     public async getUserInfo(req: Request, res: Response) {

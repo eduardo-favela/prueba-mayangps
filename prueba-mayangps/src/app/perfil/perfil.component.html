@@ -21,7 +21,7 @@
     <button class="btn btn-primary form-control" (click)="openEditModal()">Actualizar</button>
   </div>
   <div class="col-md-2">
-    <button class="btn btn-danger form-control" (click)="openConfirmDelModal()">Eliminar cuenta</button>
+    <button class="btn btn-danger form-control" (click)="openConfirmModal('deleteUsr')">Eliminar cuenta</button>
   </div>
 </div>
 
@@ -29,7 +29,7 @@
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-dark text-white">
         <h5 class="modal-title" id="staticBackdropLabel">Actualizar datos</h5>
       </div>
       <div class="modal-body">
@@ -46,7 +46,7 @@
         </div>
         <div class="row d-flex justify-content-center m-3">
           <div class="col-md-10">
-            <label for="contraInput">Contraseña</label>
+            <label for="contraInput">Contraseña (deje el campo en blanco si no desea cambiarla)</label>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon4"><i class="fa
                   fa-asterisk" aria-hidden="true"></i></span>
@@ -67,13 +67,73 @@
         <div class="alert alert-danger" [hidden]="!alertModal" role="alert">
           {{alertModalMsg}}
         </div>
-        <div class="alert alert-success" [hidden]="!alertModalSuccess" role="alert">
-          Cambios guardados
+      </div>
+      <div class="modal-footer">
+        <button [disabled]="disabledFormModal" type="button" class="btn btn-danger" (click)="cierreModal()">Cancelar</button>
+        <button [disabled]="disabledFormModal" type="button" class="btn btn-success" (click)="openConfirmModal('saveUsrChanges')">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ConfirmModal -->
+<div class="modal fade" id="confirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="confirmModalLabel">Confirmar acción</h5>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-warning" role="alert">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ¿Seguro que desea guardar los cambios?
+        </div>
+        <div class="row py-3 d-flex justify-content-center">
+          <div class="spinner-border text-success" [hidden]="!loadingChanges" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button [disabled]="disabledFormModal" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cierreModal()">Cancelar</button>
-        <button [disabled]="disabledFormModal" type="button" class="btn btn-success" (click)="saveUser()">Guardar</button>
+        <button [disabled]="loadingChanges" type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="cancelConfirmModal()">Cancelar</button>
+        <button [disabled]="loadingChanges" type="button" class="btn btn-success" (click)="acceptConfirmModal()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ErrorModal -->
+<div class="modal fade" id="errorModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+          <i class="fa fa-times-circle" aria-hidden="true"></i> No ha sido posible guardar los cambios.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SuccessModal -->
+<div class="modal fade" id="successModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="successModalLabel">Cambios guardados</h5>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success" role="alert">
+          <i class="fa fa-check-circle" aria-hidden="true"></i> Los cambios fueron guardados exitosamente.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

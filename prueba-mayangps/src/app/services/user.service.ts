@@ -17,6 +17,10 @@ export class UserService {
     return this.http.post(`${API_URI}/user/updateUser`, userdata)
   }
 
+  deleteUser(userdata: any) {
+    return this.http.post(`${API_URI}/user/deleteUser`, userdata)
+  }
+
   getUserInfo(key: any) {
     return this.http.post(`${API_URI}/user/getUserInfo`, key)
   }

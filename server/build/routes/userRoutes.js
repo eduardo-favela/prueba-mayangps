@@ -13,6 +13,7 @@ class UserRoutes {
     config() {
         this.router.post('/setUser', userController_1.default.setUser);
         this.router.post('/updateUser', userController_1.default.updateUser);
+        this.router.post('/deleteUser', userController_1.default.deleteUser);
         this.router.post('/getUserInfo', userController_1.default.getUserInfo);
     }
 }

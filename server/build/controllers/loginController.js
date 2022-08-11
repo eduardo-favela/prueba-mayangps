@@ -36,12 +36,16 @@ class LoginController {
             const resultUsr = yield database_1.default.query(`SELECT * FROM Usuarios WHERE usuario = ?`, req.body.usuarioID);
             if (resultUsr.length > 0) {
                 req.body.usuarioID = resultUsr[0].usuarioID;
+                database_1.default.query(`INSERT INTO Sesiones set ?`, req.body, function (err, result, fields) {
+                    if (err)
+                        throw err;
+                    res.json(result);
+                });
             }
-            yield database_1.default.query(`INSERT INTO Sesiones set ?`, req.body, function (err, result, fields) {
-                if (err)
-                    throw err;
-                res.json(result);
-            });
+            else {
+                console.log(resultUsr);
+                res.json(false);
+            }
         });
     }
     deleteSessionKey(req, res) {

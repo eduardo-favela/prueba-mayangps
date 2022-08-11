@@ -11,6 +11,7 @@ class UserRoutes {
     config(): void{
         this.router.post('/setUser', userController.setUser)
         this.router.post('/updateUser', userController.updateUser)
+        this.router.post('/deleteUser', userController.deleteUser)
         this.router.post('/getUserInfo', userController.getUserInfo)
     }
 }
