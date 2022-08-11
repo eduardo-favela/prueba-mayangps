@@ -202,7 +202,17 @@ export class PerfilComponent implements OnInit {
       }
     }
     else {
-      return true
+      if (this.editUsrInfo.pass) {
+        if (this.editUsrInfo.pass.length > 25) {
+          return false
+        }
+        else {
+          return true
+        }
+      }
+      else{
+        return true
+      }
     }
   }
 }
