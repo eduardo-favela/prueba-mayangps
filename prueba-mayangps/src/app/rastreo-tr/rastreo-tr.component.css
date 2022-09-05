@@ -1,0 +1,48 @@
+img {
+  width: 100%;
+}
+
+i {
+  margin-right: 1rem;
+}
+
+.eqInfo h4 {
+  color: rgb(100, 149, 237);
+}
+
+.eqInfo p {
+  font-weight: 600;
+}
+
+#map {
+  height: 30rem;
+  width: 100%;
+}
+
+.iconoMensaje {
+  width: 4rem;
+  margin-right: 1.5rem;
+}
+
+.mensajeEq {
+  margin: 0 !important;
+  color: rgb(100, 149, 237);
+}
+
+.input-icon {
+  color: rgb(100, 149, 237);
+}
+
+.form-control-line {
+  border: 0px;
+  border-radius: 0px;
+  padding-left: 0px;
+  border-bottom: 1px solid #e9ecef; }
+  .form-control-line:focus {
+    border-bottom: 1px solid #009efb; }
+
+.eqInfo-section{
+  border-right: solid;
+  border-right-width: 1px;
+  border-right-color: #cbcaca;
+}

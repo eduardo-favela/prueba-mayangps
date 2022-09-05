@@ -1,0 +1,431 @@
+<div class="row d-flex justify-content-center pt-3">
+  <div class="col-md-4">
+    <label for="equiposelect">Seleccionar equipo</label>
+    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+    <datalist id="datalistOptions">
+      <option value="Equipo 1">
+      <option value="Equipo 2">
+      <option value="Equipo 3">
+      <option value="Equipo 4">
+      <option value="Equipo 5">
+    </datalist>
+  </div>
+</div>
+<div class="row d-flex justify-content-center pt-5 px-5">
+  <div class="col-md-6 text-center">
+    <h3>Estadísticos en tiempo real</h3>
+  </div>
+  <hr>
+</div>
+<div class="row d-flex justify-content-center">
+  <div class="col-4 d-flex align-items-center">
+    <img class="iconoMensaje" src="assets/img/satelital.png" alt="iconoMensaje">
+    <h4 class="mensajeEq">SIN COBERTURA Satelital</h4>
+  </div>
+</div>
+<div class="row d-flex justify-content-between">
+  <div class="col-4 pt-5">
+    <div class="row pt-3">
+      <div class="col-12 text-end eqInfo">
+        <h4 ><i class="fa fa-tachometer" aria-hidden="true"></i>Velocidad</h4>
+        <p>{{eqStats.velocidad}} km/h</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 text-end eqInfo">
+        <h4 ><i class="fa fa-compass" aria-hidden="true"></i>Coordenadas</h4>
+        <p>{{eqStats.coordenadas}} (Lat/Lng)</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 text-end eqInfo">
+        <h4 ><i class="fa fa-map-o" aria-hidden="true"></i>Dirección texto</h4>
+        <p>{{eqStats.direccion}}</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 text-end eqInfo">
+        <h4 ><i class="fa fa-thermometer-half mr-3" aria-hidden="true"></i> Temperatura</h4>
+        <p>{{eqStats.temperatura}}°</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 text-end eqInfo">
+        <h4 ><i class="fa fa-calendar" aria-hidden="true"></i> Fecha hora</h4>
+        <p>{{eqStats.fechahora}}</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 text-end eqInfo">
+        <h4 ><i class="fa fa-lightbulb-o" aria-hidden="true"></i>Out 1</h4>
+        <p>{{eqStats.fechahora}}</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 text-end eqInfo">
+        <h4 ><i class="fa fa-lightbulb-o" aria-hidden="true"></i>Out 2</h4>
+        <p>{{eqStats.fechahora}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-4 d-flex align-items-center">
+    <img src="assets/img/gps.png" alt="equipo">
+  </div>
+  <div class="col-4 pt-5">
+    <div class="row pt-3">
+      <div class="col-12  eqInfo">
+        <h4 ><i class="fa fa-bolt" aria-hidden="true"></i>Voltaje externo</h4>
+        <p>{{eqStats.voltext}} volts</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 eqInfo">
+        <h4 ><i class="fa fa-battery-half" aria-hidden="true"></i>Voltaje interno</h4>
+        <p>{{eqStats.voltint}} volts</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 eqInfo">
+        <h4 ><i class="fa fa-signal" aria-hidden="true"></i>Señal GPS</h4>
+        <p>{{eqStats.senalgps}}</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 eqInfo">
+        <h4 ><i class="fa fa-rss-square" aria-hidden="true"></i>Señal GSM</h4>
+        <p>{{eqStats.senalgsm}}</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 eqInfo">
+        <h4 ><i class="fa fa-power-off" aria-hidden="true"></i>Din 1</h4>
+        <p>{{eqStats.senalgsm}}</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 eqInfo">
+        <h4 ><i class="fa fa-exclamation-circle" aria-hidden="true"></i>Din 2</h4>
+        <p>{{eqStats.senalgsm}}</p>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-12 eqInfo">
+        <h4 ><i class="fa fa-lightbulb-o" aria-hidden="true"></i>Din 3</h4>
+        <p>{{eqStats.senalgsm}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row d-flex justify-content-center pt-5 px-5">
+  <div class="col-md-6 text-center">
+    <h3>Histórico de estadísticos</h3>
+  </div>
+  <hr>
+</div>
+<div class="row d-flex justify-content-center pt-3">
+  <div class="col-md-4">
+    <label for="dates">Opciones de fecha de estadísticos</label>
+    <select class="form-control" [(ngModel)]="dateOptionSelected" id="cuentaEq" (change)="dateOptionsChanged()">
+      <option value=0 disabled selected>Seleccione una opción...</option>
+      <option *ngFor="let option of dateOptions" [value]="option.id">{{option.label}}</option>
+    </select>
+  </div>
+</div>
+<div class="row d-flex justify-content-around pt-3">
+  <div class="col-md-4" [hidden]="!dateRange">
+    <label for="inicialDate">Fecha inicial</label>
+    <input type="date" id="inicialDate" class="form-control" [(ngModel)]="filters.inicialDate">
+  </div>
+  <div class="col-md-4" [hidden]="!dateRange">
+    <label for="finalDate">Fecha final</label>
+    <input type="date" id="finalDate" class="form-control" [(ngModel)]="filters.finalDate">
+  </div>
+</div>
+
+<div class="row pt-5">
+  <div class="col-6">
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <canvas baseChart height ="50px"
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+        [type]="lineChartType"></canvas>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <canvas baseChart height ="50px"
+        [data]="lineChartData2"
+        [options]="lineChartOptions"
+        [type]="lineChartType"></canvas>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <canvas baseChart height ="50px"
+        [data]="lineChartData3"
+        [options]="lineChartOptions"
+        [type]="lineChartType"></canvas>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <canvas baseChart height ="50px"
+        [data]="lineChartData4"
+        [options]="lineChartOptions"
+        [type]="lineChartType"></canvas>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <canvas baseChart height ="50px"
+        [data]="lineChartData5"
+        [options]="lineChartOptions"
+        [type]="lineChartType"></canvas>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <canvas baseChart height ="50px"
+        [data]="lineChartData6"
+        [options]="lineChartOptions"
+        [type]="lineChartType"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 d-flex align-items-center">
+    <div id="map"
+    leaflet
+    (leafletMapReady)="onMapReady($event)"
+    [leafletOptions]="mapOptions">
+    </div>
+  </div>
+</div>
+
+<div class="row d-flex justify-content-center pt-5">
+  <div class="col-11">
+    <table id="tablaColabs" class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
+      <thead>
+        <tr>
+          <th>Velocidad</th>
+          <th>Coordenadas</th>
+          <th>Dirección texto</th>
+          <th>Voltaje externo</th>
+          <th>Voltaje interno</th>
+          <th>Señal GPS</th>
+          <th>Señal GSM</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor="let data of eqDataHistorical">
+          <td>{{data.velocidad}}</td>
+          <td>{{data.coordenadas}}</td>
+          <td>{{data.direccion}}</td>
+          <td>{{data.voltext}}</td>
+          <td>{{data.voltint}}</td>
+          <td>{{data.senalgps}}</td>
+          <td>{{data.senalgsm}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row d-flex justify-content-center pt-5 px-5">
+  <div class="col-md-6 text-center">
+    <h3>Información</h3>
+  </div>
+  <hr>
+</div>
+<div class="row pt-3 pb-5">
+  <div class="col-6 eqInfo-section">
+    <div class="row text-center">
+      <h4>Equipo</h4>
+      <hr>
+    </div>
+    <div class="row pt-4">
+      <div class="col-md-4">
+        <i class="fa fa-hashtag fa-lg input-icon"></i>
+        <small class="text-muted">Id del Equipo</small>
+        <input type="text" class="form-control form-control-line" [(ngModel)]="eqInfo.noSerie">
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-microchip fa-lg input-icon"></i>
+        <small class="text-muted">Modelo GPS</small>
+        <select class="form-control form-control-line" id="cuentaEq">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-microchip fa-lg input-icon"></i>
+        <small class="text-muted">IMEI</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <i class="fa fa-tag fa-lg input-icon"></i>
+        <small class="text-muted">No. SIM</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-calendar fa-lg input-icon"></i>
+        <small class="text-muted">Fecha de instalación</small>
+        <input type="date" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-child fa-lg input-icon"></i>
+        <small class="text-muted">Instalador</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <i class="fa fa-crosshairs fa-lg input-icon"></i>
+        <small class="text-muted">Ubicación del equipo</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-8">
+        <i class="fa fa-comment fa-lg input-icon"></i>
+        <small class="text-muted">Adicionales</small>
+       <textarea type="text" rows="1" class="form-control form-control-line" maxlength="1500"></textarea>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <i class="fa  fa-clock-o fa-lg input-icon"></i>
+        <small class="text-muted">Tiempo autoreporte enc.</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa  fa-clock-o fa-lg input-icon"></i>
+        <small class="text-muted">Tiempo autoreporte apg.</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa  fa-compass fa-lg input-icon"></i>
+        <small class="text-muted">Autoreporte en vuelta (grados)</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <i class="fa fa-power-off fa-lg input-icon"></i>
+        <small class="text-muted">Din1</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa  fa-exclamation-circle fa-lg input-icon"></i>
+        <small class="text-muted">Din2</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa  fa-lightbulb-o fa-lg input-icon"></i>
+        <small class="text-muted">Din3</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <i class="fa  fa-lightbulb-o fa-lg input-icon"></i>
+        <small class="text-muted">OUT1</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa  fa-lightbulb-o fa-lg input-icon"></i>
+        <small class="text-muted">OUT2</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="row text-center">
+      <h4>Unidad</h4>
+      <hr>
+    </div>
+    <div class="row pt-4">
+      <div class="col-md-4">
+        <i class="fa fa-font fa-lg input-icon"></i>
+        <small class="text-muted">Neconomico</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-circle fa-lg input-icon"></i>
+        <small class="text-muted">Estatus</small>
+        <select class="form-control form-control-line" id="cuentaEq">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-flash fa-lg input-icon"></i>
+        <small class="text-muted">Voltaje de operación</small>
+        <select class="form-control form-control-line" id="unidadEq">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <img id="INFO_ICON" style="height: 20px;margin-top: -5px;" src="assets/img/tipo_ve_4.svg">
+        <small class="text-muted">Tipo unidad</small>
+        <select class="form-control form-control-line" id="cuentaEq">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-tag fa-lg input-icon"></i>
+        <small class="text-muted">Marca</small>
+        <select class="form-control form-control-line">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-tag fa-lg input-icon"></i>
+        <small class="text-muted">Sub-marca</small>
+        <select class="form-control form-control-line" id="unidadEq">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <i class="fa fa-tag fa-lg input-icon"></i>
+        <small class="text-muted">Modelo</small>
+        <select class="form-control form-control-line" id="cuentaEq">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-hashtag fa-lg input-icon"></i>
+        <small class="text-muted">Serie</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa fa-hashtag fa-lg input-icon"></i>
+        <small class="text-muted">Motor</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-4">
+        <i class="fa  fa-hashtag fa-lg input-icon"></i>
+        <small class="text-muted">Placas</small>
+        <input type="text" class="form-control form-control-line">
+      </div>
+      <div class="col-md-4">
+        <i class="fa  fa-tint fa-lg input-icon"></i>
+        <small class="text-muted">Color</small>
+        <select class="form-control form-control-line" id="cuentaEq">
+          <option value=0 disabled selected>Seleccione una opción...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row pt-5">
+      <div class="col-md-12">
+        <i class="fa  fa-comment fa-lg input-icon"></i>
+        <small class="text-muted">Observaciones</small>
+       <textarea type="text" rows="1" class="form-control form-control-line" maxlength="1500"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

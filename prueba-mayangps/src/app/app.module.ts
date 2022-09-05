@@ -10,7 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { PerfilComponent } from './perfil/perfil.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import * as bootstrap from 'bootstrap'
-import * as $ from 'jquery'
+import * as $ from 'jquery';
+import { RastreoTrComponent } from './rastreo-tr/rastreo-tr.component'
+import { NgChartsModule } from 'ng2-charts'
+import { DataTablesModule } from 'angular-datatables';
 
 const routes: Route[] = [
   { path: '', component: HomeComponent },
@@ -22,7 +25,8 @@ const routes: Route[] = [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    PerfilComponent
+    PerfilComponent,
+    RastreoTrComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,10 @@ const routes: Route[] = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
-    LeafletModule
+    LeafletModule,
+    NgChartsModule,
+    DataTablesModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
